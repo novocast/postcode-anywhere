@@ -7,8 +7,8 @@ Currently this wrapper only makes use of the CapturePlus web service that finds 
 
 Dependencies
 ------------
-[**PHP cURL**] (http://php.net/manual/en/curl.installation.php)
-[**Laravel >= 5.2**] (https://laravel.com/docs/5.2)
+ * [**PHP cURL**] (http://php.net/manual/en/curl.installation.php)
+ * [**Laravel >= 5.2**] (https://laravel.com/docs/5.2)
 
 
 Installation
