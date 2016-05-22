@@ -11,12 +11,12 @@ return [
     'services' => [
         'find' => [
             // CapturePlus Interactive Find (v2.10) - http://www.pcapredict.com/support/webservice/captureplus/interactive/find/2.1/
-            'CapturePlusFind' => 'CapturePlus/Interactive/Find/v2.10/'
+            'CapturePlus' => 'CapturePlus/Interactive/Find/v2.10/'
         ],
 
         'retrieve' => [
             // CapturePlus Interactive Retrieve (v2.10) - http://www.pcapredict.com/support/webservice/captureplus/interactive/retrieve/2.1/
-            'CapturePlusRetrieve' => 'CapturePlus/Interactive/Retrieve/v2.10/',
+            'CapturePlus' => 'CapturePlus/Interactive/Retrieve/v2.10/',
         ]
     ],
 

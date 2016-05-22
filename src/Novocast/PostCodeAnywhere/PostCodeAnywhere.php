@@ -25,7 +25,7 @@ class PostCodeAnywhere
             $this->setup();
 
         } else {
-            throw new Exception('Invalid Config File');
+            throw new \ErrorException('Invalid Config File');
 
         }
 
@@ -34,7 +34,7 @@ class PostCodeAnywhere
 
     /**
      * Validate configuration file
-     * @throws Exception
+     * @throws \ErrorException
      */
     protected function hasValidConfig()
     {
@@ -42,7 +42,7 @@ class PostCodeAnywhere
         $valid = true;
 
         if (!\Config::has('pca')) {
-            throw new Exception('Unable to find config file.');
+            throw new \ErrorException('Unable to find config file.');
             $valid = false;
 
         }
@@ -50,25 +50,25 @@ class PostCodeAnywhere
         $config = \Config::get('pca');
             
         if (!array_key_exists('params', $config) || !array_key_exists('key', $config['params']) || empty($config['params']['key'])) {
-            throw new Exception('Postcode Anywhere Key must be set in config file.');
+            throw new \ErrorException('Postcode Anywhere Key must be set in config file.');
             $valid = false;
 
         }
             
         if (!array_key_exists('url', $config) || empty($config['url'])) {
-            throw new Exception('Web service URL is not set in config file.');
+            throw new \ErrorException('Web service URL is not set in config file.');
             $valid = false;
 
         }
 
         if (!array_key_exists('services', $config) || !count($config['services'] < 1)) {
-            throw new Exception('Service URLs must be set in config file');
+            throw new \ErrorException('Service URLs is not set in config file');
             $valid = false;
 
         }
             
         if (!array_key_exists('endpoint', $config) || !count($config['endpoint'] < 1)) {
-            throw new Exception('End point must be set in config file');
+            throw new \ErrorException('End point is not set in config file');
             $valid = false;
 
         }
@@ -109,48 +109,50 @@ class PostCodeAnywhere
         
     /**
      * @param array $param    ['postcode'=>'AB12 3CD', 'endpoint'=> 'json']
-     * @return object
+     * @return array
      */
     public function find($params)
     {
-        
         if (empty($params)) {
-            throw new Exception('No parameters are given.');
+            throw new \ErrorException('No parameters are given.');
         }
 
-        $this->setParams($params);
         $this->setRequestType('find');
-                
-        return $this->makeRequest();
+        $this->setParams($params);
+        
+        $response = $this->makeRequest();
+
+        return $this->parseResponse($response);
     }
         
     /**
      * @param array $param   ['postcode'=>' FG45 6HI', 'endpoint'=> 'xml']
-     * @return object
+     * @return array
      */
     public function retrieve($params = [])
     {
-        
         if (empty($params)) {
-            throw new Exception('No parameters are given.');
+            throw new \ErrorException('No parameters are given.');
         }
 
-        $this->setParams($params);
         $this->setRequestType('retrieve');
-                
-        return $this->makeRequest();
+        $this->setParams($params);
+        
+        $response = $this->makeRequest();
+
+        return $this->parseResponse($response);
     }
     
     /**
      * Set request type find or retrieve
      * @param array $action
-     * @throws Exception
+     * @throws \ErrorException
      */
     protected function setRequestType($action)
     {
         
         if (!in_array($action, ['find','retrieve'])) {
-            throw new Exception('Invalid request type.');
+            throw new \ErrorException('Invalid request type.');
         }
         
         $this->requestType = $action;
@@ -163,15 +165,17 @@ class PostCodeAnywhere
     protected function setParams($params)
     {
         // endpoint
-        if (isset($params['endpoint'])) {
-            $this->setEndPoint($params['endpoint']);
+        if (isset($params['Endpoint'])) {
+            $this->setEndPoint($params['Endpoint']);
+            unset($params['Endpoint']);
         } else {
             $this->setEndPoint();
         }
 
         // service
-        if (isset($params['service'])) {
-            $this->setService($params['service']);
+        if (isset($params['Service'])) {
+            $this->setService($params['Service']);
+            unset($params['Service']);
         } else {
             $this->setService();
         }
@@ -184,17 +188,17 @@ class PostCodeAnywhere
     
     /**
      * @param string $serviceUrl
-     * @throws Exception
+     * @throws \ErrorException
      */
     protected function setService($service = false)
     {
         if ($service === false) {
-            throw new Exception('No web service selected.');
+            throw new \ErrorException('No web service selected.');
 
         }
         
-        if (!array_key_exists($serviceUrl, $this->services[ $this->requestType])) {
-            throw new Exception('Web service '.$serviceUrl.' is invalid.');
+        if (!array_key_exists($service, $this->services[$this->requestType])) {
+            throw new \ErrorException('Web service '.$service.' is invalid.');
 
         }
         
@@ -202,22 +206,21 @@ class PostCodeAnywhere
     }
     
     /**
-     * Set the end point for the API. This dictates format of response.
+     * Set the end point for the API. This dictates format of response. JSON is default
      * @param array $param
-     * @return array
+     * @return object $this
      */
     protected function setEndPoint($endpoint = false)
     {
-        $this->requestEndPoint = 'wsdlnew.ws';
+        $this->requestEndPoint = 'json.ws';
         
         if ($endpoint !== false && array_key_exists($endpoint, $this->endPoints)) {
             // is given endpoint correct
             $this->requestEndPoint =  $endpoint;
-            unset($param['endpoint']);
 
         }
         
-        return $param;
+        return $this;
     }
     
     /**
@@ -246,12 +249,18 @@ class PostCodeAnywhere
         $output = curl_exec($ch);
        
         if ($output === false) {
-            throw new Exception(curl_error($ch));
+            throw new \ErrorException(curl_error($ch));
         }
 
         curl_close($ch);
         return $output;
 
+    }
+
+    public function parseResponse($response)
+    {
+        return $response;
+        
     }
 
     /**
@@ -260,7 +269,7 @@ class PostCodeAnywhere
      */
     public function getLastRequestURL()
     {
-        return $this->requestUrl();
+        return $this->requestUrl;
         
     }
 }
