@@ -1,0 +1,29 @@
+{
+	"name": "novocast/postcode-anywhere",
+	"description": "A Laravel wrapper for PCA Predict APIs",
+	"keywords": [
+        "postcode anywhere", "PCA", "PCA Predict",
+        "postcode finder", "postcode lookup", "postcode search", "postcode API",
+        "address finder", "address lookup", "address search", "address API",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Anthony Totton",
+            "email": "novocast7@gmail.com"
+        }
+    ],    
+	"license": "MIT",
+	"require": { 
+		"laravel/framework": "5.*"
+	},
+    "require-dev": {
+        "laravel/framework": "5.*",
+        "phpunit/phpunit": "4.7.*"
+    },         
+	"autoload": {
+		"psr-0": {
+            "novocast\\PostCodeAnywhere": "src/"
+		}
+	}
+}
