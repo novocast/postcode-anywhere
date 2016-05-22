@@ -23,7 +23,7 @@
     },         
 	"autoload": {
 		"psr-0": {
-            "novocast\\PostCodeAnywhere": "src/"
+            "Novocast\\PostCodeAnywhere": "src/"
 		}
 	}
 }

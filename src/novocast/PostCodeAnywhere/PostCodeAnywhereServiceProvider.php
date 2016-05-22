@@ -1,6 +1,8 @@
-<?php namespace novocast\PostCodeAnywhere;
+<?php
 
-use Illuminate\Support\ServiceProvider;
+namespace Novocast\PostCodeAnywhere;
+
+use Illuminate\Support\ServiceProvider as ServiceProvider;
 
 class PostCodeAnywhereServiceProvider extends ServiceProvider
 {

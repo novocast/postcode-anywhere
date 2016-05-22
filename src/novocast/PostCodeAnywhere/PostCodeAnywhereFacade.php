@@ -1,4 +1,6 @@
-<?php namespace novocast\PostCodeAnywhere;
+<?php
+
+namespace Novocast\PostCodeAnywhere;
 
 use Illuminate\Support\Facades\Facade;
 

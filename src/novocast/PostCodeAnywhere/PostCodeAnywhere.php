@@ -1,4 +1,6 @@
-<?php namespace novocast\PostCodeAnywhere;
+<?php
+
+namespace Novocast\PostCodeAnywhere;
 
 class PostCodeAnywhere
 {
