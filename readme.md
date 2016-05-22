@@ -45,11 +45,13 @@ To start using this module all you need to do is register the Laravel service pr
 ]
 ```
 
-Finally, publish your configuration file and don't forget to replace the placeholder service key with your own:
+Publish your configuration file:
 
 ```php 
     php artisan vendor:publish
 ``` 
+
+Finally, replace the required Key with your own, as `PCA_KEY` in your `.env` file.
 
 
 How to Use
