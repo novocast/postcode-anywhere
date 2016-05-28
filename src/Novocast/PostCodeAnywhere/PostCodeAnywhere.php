@@ -142,6 +142,24 @@ class PostCodeAnywhere
 
         return $this->parseResponse($response);
     }
+        
+    /**
+     * @param array $param   ['Phone'=>'07871234567', 'Country'=> 'GB']
+     * @return array
+     */
+    public function validate($params = [])
+    {
+        if (empty($params)) {
+            throw new \ErrorException('No parameters are given.');
+        }
+
+        $this->setRequestType('validate');
+        $this->setParams($params);
+        
+        $response = $this->makeRequest();
+
+        return $this->parseResponse($response);
+    }
     
     /**
      * Set request type find or retrieve

@@ -17,6 +17,11 @@ return [
         'retrieve' => [
             // CapturePlus Interactive Retrieve (v2.10) - http://www.pcapredict.com/support/webservice/captureplus/interactive/retrieve/2.1/
             'CapturePlus' => 'CapturePlus/Interactive/Retrieve/v2.10/',
+        ],
+
+        'validate' => [
+            // PhoneNumberValidation Interactive Validate (v2.10) - http://www.pcapredict.com/support/webservice/phonenumbervalidation/interactive/validate/2.1/
+            'PhoneNumberValidation' => 'PhoneNumberValidation/Interactive/Validate/v2.10/',
         ]
     ],
 
