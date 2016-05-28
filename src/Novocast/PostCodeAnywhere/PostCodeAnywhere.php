@@ -169,7 +169,7 @@ class PostCodeAnywhere
     protected function setRequestType($action)
     {
         
-        if (!in_array($action, ['find','retrieve'])) {
+        if (!in_array($action, ['find','retrieve','validate'])) {
             throw new \ErrorException('Invalid request type.');
         }
         
