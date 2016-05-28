@@ -17,6 +17,8 @@ return [
         'retrieve' => [
             // CapturePlus Interactive Retrieve (v2.10) - http://www.pcapredict.com/support/webservice/captureplus/interactive/retrieve/2.1/
             'CapturePlus' => 'CapturePlus/Interactive/Retrieve/v2.10/',
+            // Extras Web Ip2Country (v1.10) - http://www.pcapredict.com/Support/WebService/Extras/Web/Ip2Country/1.1/
+            'Ip2Country' => 'Extras/Web/Ip2Country/v1.10/'
         ],
 
         'validate' => [
