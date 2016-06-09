@@ -160,6 +160,20 @@ class PostCodeAnywhere
 
         return $this->parseResponse($response);
     }
+        
+    /**
+     * @return array
+     */
+    public function getBalance()
+    {
+
+        $this->setRequestType('retrieve');
+        $this->setParams(['Service' => 'Balance']);
+        
+        $response = $this->makeRequest();
+
+        return $this->parseResponse($response);
+    }
     
     /**
      * Set request type find or retrieve
