@@ -291,7 +291,7 @@ class PostCodeAnywhere
 
     public function parseResponse($response)
     {
-        if(stripos($this->requestEndPoint, 'json')) {
+        if(stripos($this->requestEndPoint, 'json') !== false) {
             return json_decode($response);
         }
         return $response;
