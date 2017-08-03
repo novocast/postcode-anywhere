@@ -291,7 +291,7 @@ class PostCodeAnywhere
 
     public function parseResponse($response)
     {
-        return $response;
+        return json_decode($response);
         
     }
 
